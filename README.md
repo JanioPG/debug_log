@@ -15,11 +15,16 @@ ou
 `python3 <nome do arquivo>.py`
 
 ### **Comandos utilizados internamente no script**:
+Firebase
 ```
 adb shell setprop log.tag.FA-SVC VERBOSE
 adb logcat -v time -s FA FA-SVC
 ```
-    
+Universal Analytics
+```
+adb shell setprop log.tag.GAv4-SVC DEBUG"
+adb logcat -s GAv4-SVC"
+```
 
 ### **Ferramentas sugeridas (Opcional)**:
 
