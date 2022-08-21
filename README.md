@@ -1,7 +1,7 @@
 # Debug Log
 
 Use este script para observar o disparo/acionamento das tags de eventos e screenviews, ajudando você a verificar imediatamente se os eventos estão sendo enviados.
-O script apenas habilita o log detalhado para monitorar o log de eventos pelo SDK para ajudar a verificar se os eventos estão sendo registrados corretamente. Isso inclui eventos registrados automaticamente e manualmente.
+O script apenas habilita o registro detalhado permitindo verificar se os eventos estão sendo registrados corretamente pelo SDK. Isso inclui eventos registrados manual e automaticamente.
 
 ## **Dependências**:
 * [Python](https://www.python.org/)
