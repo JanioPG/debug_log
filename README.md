@@ -14,7 +14,7 @@ Inicialize seu emulador(Android Studio) ou dispositivo físico conectado, em seg
 ou
 `python3 <nome do arquivo>.py`
 
-## **Comandos utilizados internamento no script**:
+### **Comandos utilizados internamente no script**:
 ```
 adb shell setprop log.tag.FA-SVC VERBOSE
 adb logcat -v time -s FA FA-SVC
