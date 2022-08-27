@@ -8,14 +8,13 @@ import sys
 subprocess.run("adb shell setprop log.tag.GAv4-SVC DEBUG".split(" "))
 proc = subprocess.Popen("adb logcat -s GAv4-SVC".split(" "), stdout=subprocess.PIPE)
 
-re_hit_delivery = re.compile(r'Hit saved to database.')
+re_hit_saved = re.compile(r'Hit saved to database.')
 re_event = re.compile(r't=event')
 re_screenview = re.compile(r't=screenview')
-#re_hit_saved = re.compile(r'Hit saved to database.')
 
-if (len(sys.argv) == 1): # se nenhum argumento e passado ao executar o script
+if (len(sys.argv) == 1): # se nenhum argumento foi passado ao executar o script
     for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
-        if re_hit_delivery.search(line):
+        if re_hit_saved.search(line[30:70]):
             line = re.sub(r', ', r'\n', line)
             if re_event.search(line):
                 print(f"\033[1;33m{line}\033[m")
