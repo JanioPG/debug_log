@@ -16,7 +16,7 @@ def enable_verbose_logging():
         subprocess.run("adb shell setprop log.tag.FA-SVC VERBOSE".split(" "))
         proc = subprocess.Popen("adb logcat -v time -s FA FA-SVC".split(" "), stdout=subprocess.PIPE)
     except:
-        print(f"Ops. Houve algum erro. Verifique se o adb está instalado ou se o emulador está ativo.")
+        print(f"Ops. Houve algum erro. Verifique se o adb está instalado.")
         sys.exit(1)
     else:
         return proc
@@ -50,6 +50,7 @@ def with_arguments(args: argparse.Namespace):
 
     if args.term1 == None and args.term2 == None: # caso exista somente -v
         no_arguments()
+
     elif args.term1 != None and args.term2 != None:
         proc = enable_verbose_logging()
         re_terms = re.compile(rf"{args.term1}|{args.term2}")
@@ -58,19 +59,22 @@ def with_arguments(args: argparse.Namespace):
             check_terms = list(set(re_terms.findall(line, re.IGNORECASE)))
             
             if len(check_terms) == 2:
+                check_terms.sort() # sort - ordem alfabetica
                 line = re.sub(r', ', r',', line)
                 line = re.sub(r',', r'\n', line)
-                line = re.sub(check_terms[0], f"\033[1;32m{check_terms[0]}\033[m", line)
-                line = re.sub(check_terms[1], f"\033[1;34m{check_terms[1]}\033[m", line)
+                line = re.sub(f"{check_terms[0]}", f"\033[1;32m{check_terms[0]}\033[m", line)
+                line = re.sub(f"{check_terms[1]}", f"\033[1;34m{check_terms[1]}\033[m", line)
                 print(line)
+
     elif args.term1 != None or args.term2 != None:
         proc = enable_verbose_logging()
         term = args.term1 if args.term1 != None else args.term2
         re_terms = re.compile(rf"{term}")
         
-        for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):            
-            if re_terms.search(line, re.IGNORECASE):
+        for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
+            match =re_terms.search(line, re.IGNORECASE)         
+            if match:
                 line = re.sub(r', ', r',', line)
                 line = re.sub(r',', r'\n', line)
-                line = re.sub(term, f"\033[1;32m{term}\033[m", line)
+                line = re.sub(match.group(), f"\033[1;32m{match.group()}\033[m", line)
                 print(line)
