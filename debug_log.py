@@ -1,8 +1,4 @@
-import io
-import re
-import subprocess
 import sys
-import os
 import argparse
 from platforms import firebase, univesal_analytics, appsflyer, gtm
 from interface import title, options, clean_screen, verbose_custom
@@ -23,6 +19,14 @@ def receive_arguments():
 
 
 def user_choice(verbose: bool):
+    """Obtém a plataforma/analytics de escolha do usuário.
+
+    Args:
+        verbose (bool): Determina se a descrição do programa será exibida para o usuário no menu de escolha da plataforma.
+
+    Returns:
+        action (str): Indíce da plataforma escolhida pelo usuário.
+    """
     option = ["Firebase", "Universal Analytics", "AppsFlyer", "Google Tag Manager", "Sair"]
     action = ""
     msg = ""
@@ -38,9 +42,6 @@ def user_choice(verbose: bool):
         action = input(str("Opção: ")).strip()
         msg = "\033[31mOpção inválida. Escolha entre 1, 2, 3 ou 4.\033[m"
         
-        
-
-
     return action
 
 
@@ -58,6 +59,13 @@ if __name__ == "__main__":
             firebase.no_arguments()
         elif action == "1":
             univesal_analytics.no_arguments()
+        # opcoes sem filtros
+        elif action == "2":
+            appsflyer.appsFlyer()
+        elif action == "3":
+            gtm.main()
+        elif action == "4":
+            pass
     
     else:
         if action == "0":

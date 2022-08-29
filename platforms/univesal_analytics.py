@@ -23,6 +23,8 @@ def enable_verbose_logging():
 
 
 def no_arguments():
+    """Exibe os logs das tags de eventos e screenview no terminal. Ou seja, hits salvos no banco de dados.
+    """
     proc = enable_verbose_logging()
 
     re_hit_saved = re.compile(r'Hit\ saved\ to\ database')
@@ -41,6 +43,11 @@ def no_arguments():
 
 
 def with_arguments(args: argparse.Namespace):
+    """Filtra os logs detalhados com base nos argumentos passados pelo usuário.
+
+    Args:
+        args (argparse.Namespace): Argumentos passados pelo usuário na chamada para execução do script.
+    """
     if args.term1 == None and args.term2 == None: # caso exista somente -v
         no_arguments()
 
@@ -57,7 +64,6 @@ def with_arguments(args: argparse.Namespace):
                 line = re.sub(f"{check_terms[0]}", f"\033[1;32m{check_terms[0]}\033[m", line)
                 line = re.sub(f"{check_terms[1]}", f"\033[1;34m{check_terms[1]}\033[m", line)
                 print(line)
-
     
     elif args.term1 != None or args.term2 != None:
         proc = enable_verbose_logging()

@@ -23,6 +23,8 @@ def enable_verbose_logging():
 
 
 def no_arguments():
+    """Exibe os logs das tags de eventos e screenview no terminal. Ou seja, os eventos que estão sendo registrados. 
+    """
     proc = enable_verbose_logging()
 
     re_capture_bundle = re.compile(r"Logging\ event:")
@@ -46,7 +48,11 @@ def no_arguments():
 
 
 def with_arguments(args: argparse.Namespace):
+    """Filtra os logs detalhados com base nos argumentos passados pelo usuário.
 
+    Args:
+        args (argparse.Namespace): Argumentos passados pelo usuário na chamada para execução do script.
+    """
     if args.term1 == None and args.term2 == None: # caso exista somente -v
         no_arguments()
 
