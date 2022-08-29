@@ -25,18 +25,20 @@ Nele verá as informações dos argumentos que você pode especificar.
     Exemplo (Firebase): 
     `debug_log.py -t1 select_content -t2 item_name=produto1`
     
-    O exemplo acima irá retorar logs que sejam de um evento chamado select_conten e tenha como parâmetro item_name=produto1.
+    O exemplo acima irá retorar logs que sejam de um evento chamado select_content e tenha como parâmetro item_name=produto1.
     
-    Fique á vontade para realizar o filtro por RegEx também.
+    Fique à vontade para realizar o filtro por RegEx também.
     
 * `python debug_log.py -t1 "Add\ To\ Cart"`
-   Como motrado acima, você também pode buscar por apenas um termo. Nesse exemplo, você receberá o retorno do evento que tiver o valor "Add To Cart" como valor em um dos parâmetros, por exemplo, em action (usado em dual tags).
+   
+   Com esse exemplo, você também pode buscar por apenas um termo. Nesse exemplo, você receberá o retorno do evento que tiver o valor "Add To Cart" como valor em um dos parâmetros, por exemplo, em action (usado em dual tags).
    Para esse exemplo, você pode ainda buscar por dois ou mais termos, da seguinte forma usando ReGex:
    
-   `python debug_log.py -t1 "Add\ To\ Cart|select_content"`
-   Nesse exemplo, você receberá como retorno o log contento um evento 'select_content' ou evento que contém "Add To Cart" como valor em um dos parâmetros.
+ * `python debug_log.py -t1 "Add\ To\ Cart|select_content"`
+   
+   Nesse exemplo, você receberá como retorno o log contendo um evento chamado 'select_content' ou evento que contém "Add To Cart" como valor em um dos parâmetros.
 
-    O mesmo vale para o script relacionado ao Universal Analytics.
+    **O mesmo vale para o script relacionado ao Universal Analytics.**
 
 ### **Comandos utilizados internamente no script**:
 Firebase
