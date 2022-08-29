@@ -22,7 +22,9 @@ Digite no seu terminal: `python debug_log.py -h`
 Nele verá as informações dos argumentos que você pode especificar.
 * `python debug_log.py -t1 "termo de busca 1" -t2 "termo de busca 2"`
     
-    Exemplo (Firebase): debug_log.py -t1 select_content -t2 item_name=produto1
+    Exemplo (Firebase): 
+    `debug_log.py -t1 select_content -t2 item_name=produto1`
+    
     O exemplo acima irá retorar logs que sejam de um evento chamado select_conten e tenha como parâmetro item_name=produto1.
     
     Fique á vontade para realizar o filtro por RegEx também.
