@@ -2,8 +2,10 @@ import io
 import re
 import subprocess
 import sys
+import os
 import argparse
-from platforms import firebase
+from platforms import firebase, univesal_analytics, appsflyer, gtm
+from interface import title, options, clean_screen, verbose_custom
 
 
 def receive_arguments():
@@ -12,7 +14,7 @@ def receive_arguments():
     Returns:
         [argparse.Namespace]: todos os argumentos
     """
-    parser = argparse.ArgumentParser(description="Quando dois ou um termo de pesquisa é passado, você pode buscá-los separados ou combinados.")
+    parser = argparse.ArgumentParser(description="Ative o registro detalhado e veja imediatamente o envio dos eventos. Use argumentos para filtrar.")
     parser.add_argument("-t1", "--term1", type=str, help="Primeiro termo de pesquisa.")
     parser.add_argument("-t2", "--term2", type=str, help="Segundo termo de pesquisa.")
     parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
@@ -20,29 +22,55 @@ def receive_arguments():
     return parser.parse_args()
 
 
-def user_choice(list: list):
-    print("Escolha a plataforma:")
-    for i, item in enumerate(list):
-        print(f"[{i}] - {item}")
-    option = input(str("Option: "))
-    return option
+def user_choice(verbose: bool):
+    option = ["Firebase", "Universal Analytics", "AppsFlyer", "Google Tag Manager", "Sair"]
+    action = ""
+    msg = ""
+    description = verbose
+
+    while action not in ["0", "1", "2", "3", "4"]:
+        clean_screen()
+        title("Debug Log")
+        if description:
+            verbose_custom()
+        options(option, msg)
+
+        action = input(str("Opção: ")).strip()
+        msg = "\033[31mOpção inválida. Escolha entre 1, 2, 3 ou 4.\033[m"
+        
+        
+
+
+    return action
 
 
 if __name__ == "__main__":
-
-    option = ["Firebase", "Universal", "AppsFlyer", "Sair"]
+    args = receive_arguments()
+    description = False
     
+    if args.verbose:
+            description = True
+
+    action = user_choice(description)
+
     if (len(sys.argv) == 1):
-        if user_choice(option) == "1":
+        if action == "0":
             firebase.no_arguments()
+        elif action == "1":
+            univesal_analytics.no_arguments()
     
     else:
-        args = receive_arguments()
-        if args.verbose:
-            print("""Use este script para observar o disparo/acionamento das tags de eventos e screenviews, ajudando você a verificar imediatamente se os eventos estão sendo enviados.\nO script apenas habilita o registro detalhado permitindo verificar se os eventos estão sendo registrados corretamente pelo SDK. Isso inclui eventos registrados manual e automaticamente.""")
-        
-        if user_choice(option) == "1":
+        if action == "0":
             firebase.with_arguments(args)
+        elif action == "1":
+            univesal_analytics.with_arguments(args)
+        # opcoes sem filtros
+        elif action == "2":
+            appsflyer.appsFlyer()
+        elif action == "3":
+            gtm.main()
+        elif action == "4":
+            pass
     
-    print("Saindo")
+    print("\033[1;32mFinalizado.\033[m")
     sys.exit(0)
