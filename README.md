@@ -10,7 +10,7 @@ O script apenas habilita o registro detalhado permitindo verificar se os eventos
 ## **Como utilizar**:
 Inicialize seu emulador(Android Studio) ou dispositivo físico conectado, em seguida execute o script Python:
 
-`python debug_log.py`
+`python debug_log.py` ou `python3 debug_log.py`
 
 Após executar esse script, será pedido que você selecione uma das plataformas. Por exemplo, digite 0 para Firebase, 1 para Universal Analytics, etc.
 
@@ -21,6 +21,7 @@ Digite no seu terminal: `python debug_log.py -h`
 
 Nele verá as informações dos argumentos que você pode especificar.
 * `python debug_log.py -t1 "termo de busca 1" -t2 "termo de busca 2"`
+    
     Exemplo (Firebase): debug_log.py -t1 select_content -t2 item_name=produto1
     O exemplo acima irá retorar logs que sejam de um evento chamado select_conten e tenha como parâmetro item_name=produto1.
     
