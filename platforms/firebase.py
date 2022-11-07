@@ -68,8 +68,8 @@ def with_arguments(args: argparse.Namespace):
                 line = re.sub(r"\w+\[\{", r"Bundle[{\n", line)
                 line = re.sub(r"\}\]", r"\n}]", line)
                 line = re.sub(r', |,', r'\n', line)
-                line = re.sub(f"{check_terms[0]}", f"\033[1;32m{check_terms[0]}\033[m", line)
-                line = re.sub(f"{check_terms[1]}", f"\033[1;34m{check_terms[1]}\033[m", line)
+                line = re.sub(f"{check_terms[0]}", f"\033[1;32;40m{check_terms[0]}\033[m", line)
+                line = re.sub(f"{check_terms[1]}", f"\033[1;34;40m{check_terms[1]}\033[m", line)
                 print(line)
 
     elif args.term1 != None or args.term2 != None:
@@ -78,10 +78,10 @@ def with_arguments(args: argparse.Namespace):
         re_terms = re.compile(rf"{term}")
         
         for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
-            match =re_terms.search(line, re.IGNORECASE)         
+            match = re_terms.search(line, re.IGNORECASE)         
             if match:
                 line = re.sub(r"\w+\[\{", r"Bundle[{\n", line)
                 line = re.sub(r"\}\]", r"\n}]", line)
                 line = re.sub(r', |,', r'\n', line)
-                line = re.sub(match.group(), f"\033[1;32m{match.group()}\033[m", line)
+                line = re.sub(match.group(), f"\033[1;32;40m{match.group()}\033[m", line)
                 print(line)
