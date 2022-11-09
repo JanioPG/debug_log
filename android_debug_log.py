@@ -1,6 +1,6 @@
 import sys
 import argparse
-from platforms import firebase, univesal_analytics, appsflyer, gtm
+from platforms_android import firebase, univesal_analytics, appsflyer, gtm
 from interface import title, options, clean_screen, verbose_custom
 
 
