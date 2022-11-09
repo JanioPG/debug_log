@@ -25,8 +25,8 @@ def no_arguments():
     proc = enable_verbose_logging()
     
     re_hit_saved = re.compile(r"GoogleAnalytics.*Saved\ hit")
-    re_event = re.compile(r"GoogleAnalytics.*\ =\ event")
-    re_screenview = re.compile(r"GoogleAnalytics.*\ =\ screenview")
+    re_event = re.compile(r"parameters\ =.*\ event")
+    re_screenview = re.compile(r"screenview")
     new_event = re.compile(r"\d\d:\d\d:\d\d.\d\d.*0x")
     continue_log = False
     event_log = ""
@@ -41,14 +41,18 @@ def no_arguments():
         
         else:
             if re_hit_saved.search(event_log, re.IGNORECASE):
+                event_log = re.sub(r"0x.*Saved\ hit", r"Google Analytics - Saved hit", event_log)
+                single_line_record = re.sub("\n", r"", event_log)
                 continue_log = False
-                event_log = re.sub(r"0x.*Saved\ hit:\ ", r"", event_log)
-                if re_event.search(event_log):
+                
+                if re_event.search(single_line_record, re.IGNORECASE):
                     print(f"\033[1;33m{event_log}\033[m")
-                elif re_screenview.search(event_log):
+
+                elif re_screenview.search(single_line_record, re.IGNORECASE):
                     print(f"\033[1;34m{event_log}\033[m")
                 else:
                     pass
+                event_log = ""
             else:
                 pass
 

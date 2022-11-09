@@ -1,6 +1,6 @@
 import sys
 import argparse
-from platforms import firebase, univesal_analytics, appsflyer, gtm
+from platforms_ios import firebase_ios, universal_analytics_ios
 from interface import title, options, clean_screen, verbose_custom
 
 
@@ -27,26 +27,27 @@ def user_choice(verbose: bool):
     Returns:
         action (str): Indíce da plataforma escolhida pelo usuário.
     """
-    option = ["Firebase", "Universal Analytics", "AppsFlyer", "Google Tag Manager", "Sair"]
+    option = ["Firebase", "Universal Analytics", "Sair"] #, "AppsFlyer", "Google Tag Manager", "Sair"]
     action = ""
     msg = ""
     description = verbose
 
-    while action not in ["0", "1", "2", "3", "4"]:
+    while action not in ["0", "1", "2"]:
         clean_screen()
-        title("Debug Log - Android")
+        title("Debug Log - iOS")
         if description:
             verbose_custom()
         options(option, msg)
 
         action = input(str("Opção: ")).strip()
-        msg = "\033[31mOpção inválida. Escolha entre 1, 2, 3 ou 4.\033[m"
+        msg = "\033[31mOpção inválida. Escolha entre 0, 1 ou 2.\033[m"
         
     return action
 
 
 if __name__ == "__main__":
     args = receive_arguments()
+    # por enquanto nao tem filtro
     description = False
     
     if args.verbose:
@@ -56,29 +57,30 @@ if __name__ == "__main__":
 
     if (len(sys.argv) == 1):
         if action == "0":
-            firebase.no_arguments()
+            firebase_ios.no_arguments()
         elif action == "1":
-            univesal_analytics.no_arguments()
-        # opcoes sem filtros
+            universal_analytics_ios.no_arguments()
         elif action == "2":
+            pass
+        # opcoes sem filtros
+        """elif action == "2":
             appsflyer.appsFlyer()
         elif action == "3":
-            gtm.main()
-        elif action == "4":
-            pass
+            gtm.main()"""
     
     else:
         if action == "0":
-            firebase.with_arguments(args)
+            firebase_ios.with_arguments(args)
         elif action == "1":
-            univesal_analytics.with_arguments(args)
+            universal_analytics_ios.with_arguments(args)
+        elif action == "2":
+            pass
+        """
         # opcoes sem filtros
         elif action == "2":
             appsflyer.appsFlyer()
         elif action == "3":
-            gtm.main()
-        elif action == "4":
-            pass
+            gtm.main()"""
     
     print("\033[1;32mFinalizado.\033[m")
     sys.exit(0)
