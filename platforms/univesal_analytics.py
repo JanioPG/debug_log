@@ -74,5 +74,5 @@ def with_arguments(args: argparse.Namespace):
             match = re_terms.search(line, re.IGNORECASE)
             if match:
                 line = re.sub(r', ', r'\n', line)
-                line = re.sub(match.group(), f"\033[1;32;40m{match.group().replace('\\', r'')}\033[m", line)
+                line = re.sub(match.group(), f"\033[1;32;40m{match.group()}\033[m", line)
                 print(line)

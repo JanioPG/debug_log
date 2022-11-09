@@ -40,7 +40,7 @@ def user_choice(verbose: bool):
         options(option, msg)
 
         action = input(str("Opção: ")).strip()
-        msg = "\033[31mOpção inválida. Escolha entre 1, 2, 3 ou 4.\033[m"
+        msg = "\033[31mOpção inválida. Escolha entre 0, 1, 2 ou 3.\033[m"
         
     return action
 
