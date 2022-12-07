@@ -62,11 +62,8 @@ if __name__ == "__main__":
             universal_analytics_ios.no_arguments()
         elif action == "2":
             pass
-        # opcoes sem filtros
-        """elif action == "2":
-            appsflyer.appsFlyer()
-        elif action == "3":
-            gtm.main()"""
+        
+        # Incluir AppsFlyer e GTM
     
     else:
         if action == "0":
@@ -75,12 +72,8 @@ if __name__ == "__main__":
             universal_analytics_ios.with_arguments(args)
         elif action == "2":
             pass
-        """
-        # opcoes sem filtros
-        elif action == "2":
-            appsflyer.appsFlyer()
-        elif action == "3":
-            gtm.main()"""
+
+        # incluir AppsFlyer e GTM
     
     print("\033[1;32mFinalizado.\033[m")
     sys.exit(0)
